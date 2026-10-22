@@ -1,4 +1,4 @@
-package com.basespringboot;
+package com.perfectdart;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,4 +9,4 @@ public class AccueilController {
     public String accueil() {
         return "Bienvenue !";
     }
-}   
+}
