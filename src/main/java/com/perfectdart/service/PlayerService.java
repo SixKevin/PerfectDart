@@ -2,6 +2,7 @@ package com.perfectdart.service;
 
 import com.perfectdart.entity.Player;
 import com.perfectdart.repository.PlayerRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
+@AllArgsConstructor
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
