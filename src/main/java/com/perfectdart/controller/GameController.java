@@ -2,6 +2,7 @@ package com.perfectdart.controller;
 
 import com.perfectdart.entity.Game;
 import com.perfectdart.service.GameService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/games")
+@RequiredArgsConstructor
 public class GameController {
 
     private final GameService gameService;
-
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
-    }
 
     @GetMapping
     public List<Game> getAll() {

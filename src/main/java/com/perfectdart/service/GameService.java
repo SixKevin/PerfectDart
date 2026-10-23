@@ -2,19 +2,17 @@ package com.perfectdart.service;
 
 import com.perfectdart.entity.Game;
 import com.perfectdart.repository.GameRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class GameService {
 
     private final GameRepository gameRepository;
-
-    public GameService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
 
     public List<Game> getAllGames() {
         return gameRepository.findAll();
