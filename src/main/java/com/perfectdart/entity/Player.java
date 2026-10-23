@@ -15,13 +15,15 @@ public class Player {
     private String pseudo;
     private String email;
     private int niveau;
+    private String password;
 
     public Player() {} // Constructeur par défaut requis par JPA
 
-    public Player(String pseudo, String email, int niveau) { // Constructeur avec paramètres
+    public Player(String pseudo, String email, int niveau, String password) { // Constructeur avec paramètres
         this.pseudo = pseudo;
         this.email = email;
         this.niveau = niveau;
+        this.password = password;
     }
 
     public Long getId() {
@@ -47,5 +49,12 @@ public class Player {
     }
     public void setNiveau(int niveau) {
         this.niveau = niveau;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

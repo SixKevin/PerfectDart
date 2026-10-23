@@ -23,7 +23,7 @@ public class PlayerService {
         return playerRepository.findById(id);
     }
 
-    public List<Player> getPlayersByPseudo(String pseudo) {
+    public Optional<Player> getPlayersByPseudo(String pseudo) {
         return playerRepository.findByPseudo(pseudo);
     }
 
@@ -36,6 +36,7 @@ public class PlayerService {
             existing.setPseudo(updated.getPseudo());
             existing.setEmail(updated.getEmail());
             existing.setNiveau(updated.getNiveau());
+            existing.setPassword(updated.getPassword()); // <-- Ajouté ici
             return playerRepository.save(existing);
         });
     }

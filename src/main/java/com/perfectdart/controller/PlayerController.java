@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/players")
@@ -29,8 +30,10 @@ public class PlayerController {
     }
 
     @GetMapping("/search")
-    public List<Player> getByPseudo(@RequestParam String pseudo) {
-        return playerService.getPlayersByPseudo(pseudo);
+    public ResponseEntity<Player> getByPseudo(@RequestParam String pseudo) {
+        return playerService.getPlayersByPseudo(pseudo)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
