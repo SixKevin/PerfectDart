@@ -4,8 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player {
 
     @Id
@@ -14,47 +20,6 @@ public class Player {
 
     private String pseudo;
     private String email;
-    private int niveau;
+    private int level; // Remplacé "niveau" par "level"
     private String password;
-
-    public Player() {} // Constructeur par défaut requis par JPA
-
-    public Player(String pseudo, String email, int niveau, String password) { // Constructeur avec paramètres
-        this.pseudo = pseudo;
-        this.email = email;
-        this.niveau = niveau;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getPseudo() {
-        return pseudo;
-    }
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public int getNiveau() {
-        return niveau;
-    }
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
