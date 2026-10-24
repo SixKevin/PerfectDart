@@ -35,7 +35,7 @@ public class PlayerService {
         return playerRepository.findById(id).map(existing -> {
             existing.setPseudo(updated.getPseudo());
             existing.setEmail(updated.getEmail());
-            existing.setNiveau(updated.getNiveau());
+            existing.setLevel(updated.getLevel());
             existing.setPassword(updated.getPassword()); // <-- Ajouté ici
             return playerRepository.save(existing);
         });
