@@ -20,6 +20,6 @@ public class Player {
 
     private String pseudo;
     private String email;
-    private int level; // Remplacé "niveau" par "level"
+    private int level;
     private String password;
 }

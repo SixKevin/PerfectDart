@@ -1,35 +1,70 @@
 # PerfectDart 🎯
 
-API REST de comptage de points, de scores et de statistiques de fléchettes (R3.03, Spring Boot).
+API REST de gestion de joueurs et de parties de fléchettes (Spring Boot, Java 21, PostgreSQL).
 
-## Binôme
+## Avancement du binôme
 
-| Membre | Tâches réalisées (Sprint 1) |
+| Membre | Travail pris en charge |
 |---|---|
-| **NOM Prénom** (Kevin) : [SixKevin](https://github.com/SixKevin) | Configuration de la base H2, arborescence des packages, entité `Player`, CRUD joueurs (`PlayerRepository`, `PlayerService`, `PlayerController`) |
-| **NOM Prénom** : [gabbegue-coder](https://github.com/gabbegue-coder) | README, entité `Game` (relation `@ManyToMany` avec `Player`), CRUD parties (`GameRepository`, `GameService`, `GameController`) |
+| Kevin ([SixKevin](https://github.com/SixKevin)) | Configuration de la base de données, entité et CRUD des joueurs |
+| [gabbegue-coder](https://github.com/gabbegue-coder) | Entité `Game`, relation avec `Player` et CRUD des parties |
 
-## Lancer l'API
+## Lancer l'API en local
+
+Depuis la racine du projet, démarrez PostgreSQL dans un terminal :
 
 ```bash
-git clone https://github.com/SixKevin/PerfectDart.git
-cd PerfectDart
+docker compose up -d postgres
+```
+
+Le conteneur expose PostgreSQL sur `localhost:5433`. Lancez ensuite Spring Boot dans un autre terminal :
+
+```bash
 ./mvnw spring-boot:run
 ```
 
-L'API tourne sur **http://localhost:8084**.
+L'API est disponible sur **http://localhost:8084**. Pour arrêter PostgreSQL :
 
-## Connexion avec Bruno
+```bash
+docker compose stop postgres
+```
 
-1. Lancer l'API (commande ci-dessus).
-2. Dans Bruno : **New Collection** → `PerfectDart`.
-3. Créer une requête avec l'URL de base `http://localhost:8084` :
+## Tout lancer avec Docker
 
-| Requête | URL | Body (JSON) |
+Cette commande démarre l'API, PostgreSQL et Adminer :
+
+```bash
+docker compose up --build
+```
+
+- API : http://localhost:8084
+- Adminer : http://localhost:8081 (serveur `postgres`, utilisateur `postgres`, mot de passe `postgrespassword`, base `base_db`)
+
+## Endpoints
+
+Les exemples de corps JSON correspondent aux champs actuels des entités. `level` est un entier et le mot de passe est facultatif à la création d'un joueur.
+
+| Méthode | URL | Corps JSON |
 |---|---|---|
 | GET | `/players` | |
-| POST | `/players` | `{"pseudo":"nokiade","email":"nokiade@gmail.com","niveau":"debutant"}` |
+| GET | `/players/{id}` | |
+| GET | `/players/search?pseudo=nokiade` | |
+| POST | `/players` | `{"pseudo":"nokiade","email":"nokiade@gmail.com","level":1}` |
+| PUT | `/players/{id}` | `{"pseudo":"nokiade","email":"nokiade@gmail.com","level":1}` |
+| DELETE | `/players/{id}` | |
 | GET | `/games` | |
+| GET | `/games/{id}` | |
 | POST | `/games` | `{"mode":"501","statut":"EN_COURS"}` |
+| PUT | `/games/{id}` | `{"mode":"501","statut":"TERMINE"}` |
+| DELETE | `/games/{id}` | |
+| POST | `/auth/login` | `{"pseudo":"nokiade","password":"mot-de-passe"}` |
 
-Pour un POST : choisir **Body → JSON**, puis cliquer sur **Send** (réponse attendue : `201`).
+Pour un POST ou un PUT dans Bruno, choisissez **Body → JSON** puis cliquez sur **Send**.
+
+## Tests
+
+Les tests utilisent une base H2 en mémoire et ne nécessitent pas de conteneur PostgreSQL :
+
+```bash
+./mvnw test
+```
