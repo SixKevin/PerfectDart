@@ -11,7 +11,7 @@ http:
     data: |-
       {
         "pseudo": "nokiade",
-        "password": "1234"
+        "password": "test-temporaire"
       }
   auth: inherit
 
