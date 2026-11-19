@@ -1,4 +1,4 @@
 name: local
 variables:
   - name: token
-    value: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImdhYmluIiwiZXhwIjoxNzk1MTAzNzc4LCJpYXQiOjE3OTUxMDAxNzh9.MY7sR7QTS_xvjZWESujnwAaF6lUKfSEXz0jCULf6Nzg
+    value: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImdhYmluIiwiZXhwIjoxNzk1MTAzOTYzLCJpYXQiOjE3OTUxMDAzNjN9.f36NmZ9qzfJ5VmWp9OPRAAvR2zQbkAey6qsqzOnO5Lw
