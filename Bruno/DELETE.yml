@@ -5,7 +5,10 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8084/players/1
+  url: http://localhost:8084/players/2
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImJydW5vLXRlc3QiLCJleHAiOjE3OTUxMDE2NjUsImlhdCI6MTc5NTA5ODA2NX0.NJGRa04xAkK1li8Ox7nPz43p7g0SJ9lYrcVCaGquRww
   auth: inherit
 
 settings:

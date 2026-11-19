@@ -6,9 +6,9 @@ info:
 http:
   method: GET
   url: http://localhost:8084/games/1
-  auth:
-    type: bearer
-    token: "{{token}}"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImJydW5vLXRlc3QiLCJleHAiOjE3OTUxMDEzNTQsImlhdCI6MTc5NTA5Nzc1NH0.rOPUKpDGy4iD-nKqjMNLNpPDb0ecwm0zrHg-OQHHdZg
 
 settings:
   encodeUrl: true

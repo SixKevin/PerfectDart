@@ -6,12 +6,12 @@ info:
 http:
   method: POST
   url: http://localhost:8084/games
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6Im5va2lhZGUiLCJleHAiOjE3OTUwOTk0MzIsImlhdCI6MTc5NTA5NTgzMn0.FzSqjacLlI9kTBI8oRyameRaHoAmK94YPjarIAhUiag
   body:
     type: json
     data: '{"mode":"501","statut":"EN_COURS"}'
-  auth:
-    type: bearer
-    token: "{{token}}"
 
 settings:
   encodeUrl: true

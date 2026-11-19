@@ -6,12 +6,15 @@ info:
 http:
   method: POST
   url: http://localhost:8084/players
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImJydW5vLXRlc3QiLCJleHAiOjE3OTUxMDE5MzgsImlhdCI6MTc5NTA5ODMzOH0.Xk17M7unXdOObaUjIMzPpGualIqpwN1MhaJhL80teTI
   body:
     type: json
     data: |-
       {
-        "pseudo": "nokiade",
-        "email": "nokiade@gmail.com",
+        "pseudo": "gabin",
+        "email": "gabin@gmail.com",
         "level": 1,
         "password": "1234"
       }
