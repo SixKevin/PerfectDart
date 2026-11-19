@@ -29,6 +29,7 @@ services:
         condition: service_healthy
     environment:
       SERVER_PORT: 8084
+      JWT_SECRET: ${JWT_SECRET:-}
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/base_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgrespassword

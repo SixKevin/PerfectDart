@@ -3,6 +3,7 @@ package com.perfectdart.service;
 import com.perfectdart.entity.Player;
 import com.perfectdart.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     public List<Player> getAllPlayers() {
@@ -28,6 +30,7 @@ public class PlayerService {
     }
 
     public Player createPlayer(Player player) {
+        encodePassword(player);
         return playerRepository.save(player);
     }
 
@@ -36,9 +39,19 @@ public class PlayerService {
             existing.setPseudo(updated.getPseudo());
             existing.setEmail(updated.getEmail());
             existing.setLevel(updated.getLevel());
-            existing.setPassword(updated.getPassword());
+            if (updated.getPassword() != null && !updated.getPassword().isBlank()) {
+                existing.setPassword(passwordEncoder.encode(updated.getPassword()));
+            }
             return playerRepository.save(existing);
         });
+    }
+
+    private void encodePassword(Player player) {
+        if (player.getPassword() == null || player.getPassword().isBlank()) {
+            player.setPassword(null);
+            return;
+        }
+        player.setPassword(passwordEncoder.encode(player.getPassword()));
     }
 
     public boolean deletePlayer(Long id) {

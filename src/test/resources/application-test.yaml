@@ -6,3 +6,5 @@ spring:
     password:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+jwt:
+  secret: test-only-jwt-secret-that-is-at-least-32-bytes-long

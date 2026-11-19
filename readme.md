@@ -11,6 +11,12 @@ API REST de gestion de joueurs et de parties de fléchettes (Spring Boot, Java 2
 
 ## Lancer l'API en local
 
+L'API utilise un secret pour signer les JWT. Définissez-en un dans le terminal avant de démarrer l'API ou Docker (ne réutilisez pas une valeur d'exemple en production) :
+
+```bash
+export JWT_SECRET="$(openssl rand -hex 32)"
+```
+
 Depuis la racine du projet, démarrez PostgreSQL dans un terminal :
 
 ```bash
@@ -59,7 +65,31 @@ Les exemples de corps JSON correspondent aux champs actuels des entités. `level
 | DELETE | `/games/{id}` | |
 | POST | `/auth/login` | `{"pseudo":"nokiade","password":"mot-de-passe"}` |
 
-Pour un POST ou un PUT dans Bruno, choisissez **Body → JSON** puis cliquez sur **Send**.
+Toutes les routes sauf `POST /auth/login` nécessitent un JWT dans l'en-tête `Authorization`. Le mot de passe n'est jamais inclus dans les réponses JSON.
+
+## Authentification Bearer
+
+`POST /auth/login` est la seule route accessible sans authentification. Les autres routes nécessitent un JWT valide, valable une heure.
+
+1. Se connecter pour obtenir un JWT :
+
+```http
+POST http://localhost:8084/auth/login
+Content-Type: application/json
+
+{"pseudo":"nokiade","password":"mot-de-passe"}
+```
+
+Réponse `200` : `{"token":"..."}`. Mauvais identifiants : `401`.
+
+2. Envoyer ce token dans l'en-tête `Authorization` sur les routes protégées :
+
+```http
+GET http://localhost:8084/players
+Authorization: Bearer <token>
+```
+
+Sans token, avec un token invalide ou expiré : `401`. Dans Bruno, onglet **Auth** de la requête, choisir **Bearer Token** et coller le token.
 
 ## Tests
 
@@ -68,26 +98,3 @@ Les tests utilisent une base H2 en mémoire et ne nécessitent pas de conteneur 
 ```bash
 ./mvnw test
 ```
-## Authentification (Bearer token)
-
-1. Se connecter pour obtenir un token :
-
-```http
-POST http://localhost:8084/auth/login
-Content-Type: application/json
-
-{"pseudo": "nokiade", "password": "1234"}
-```
-
-Réponse `200` : `{"token": "..."}`. Mauvais identifiants : `401`.
-
-2. Envoyer ce token dans le header `Authorization` sur les routes protégées (`/games/**`) :
-
-```http
-GET http://localhost:8084/games
-Authorization: Bearer <token>
-```
-
-Sans token ou avec un token invalide : `401`. `/auth/login` et `/players` restent accessibles sans token.
-
-Dans Bruno : onglet **Auth** de la requête, choisir **Bearer Token** et coller le token.
