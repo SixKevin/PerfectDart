@@ -1,9 +1,11 @@
 package com.perfectdart.controller;
 
 import com.perfectdart.entity.Player;
+import com.perfectdart.dto.RuleResponse;
 import com.perfectdart.repository.GameRepository;
 import com.perfectdart.repository.PlayerRepository;
 import com.perfectdart.service.PlayerService;
+import com.perfectdart.service.RuleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,14 @@ import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.web.context.WebApplicationContext;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -59,6 +63,9 @@ class AuthControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private RuleService ruleService;
 
     @BeforeEach
     void setUp() {
@@ -107,6 +114,11 @@ class AuthControllerTest {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Bienvenue !"));
+
+        when(ruleService.getDartsRules()).thenReturn(new RuleResponse("Fléchettes", "Règles de test"));
+        mockMvc.perform(get("/rules"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Fléchettes"));
 
         mockMvc.perform(get("/swagger-ui/index.html"))
                 .andExpect(status().isOk());

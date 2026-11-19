@@ -65,7 +65,7 @@ Les exemples de corps JSON correspondent aux champs actuels des entités. `level
 | DELETE | `/games/{id}` | |
 | POST | `/auth/login` | `{"pseudo":"nokiade","password":"mot-de-passe"}` |
 
-`GET /` et les routes `/players/**` sont accessibles sans token. Les routes `/games/**` nécessitent un JWT dans l'en-tête `Authorization`. Le mot de passe n'est jamais inclus dans les réponses JSON.
+`GET /`, `GET /rules` et les routes `/players/**` sont accessibles sans token. Les routes `/games/**` nécessitent un JWT dans l'en-tête `Authorization`. Le mot de passe n'est jamais inclus dans les réponses JSON.
 
 ## Documentation Swagger
 
@@ -75,7 +75,7 @@ Pour tester les routes `/games/**`, appelle d'abord `POST /auth/login` depuis Sw
 
 ## Authentification
 
-`POST /auth/login`, `GET /` et les routes `/players/**` sont accessibles sans authentification. Les routes `/games/**` nécessitent un JWT valide, valable une heure.
+`POST /auth/login`, `GET /`, `GET /rules` et les routes `/players/**` sont accessibles sans authentification. Les routes `/games/**` nécessitent un JWT valide, valable une heure.
 
 1. Se connecter pour obtenir un JWT :
 

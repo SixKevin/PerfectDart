@@ -8,7 +8,7 @@ http:
   url: http://localhost:8084/games
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6Im5va2lhZGUiLCJleHAiOjE3OTUwOTk0MzIsImlhdCI6MTc5NTA5NTgzMn0.FzSqjacLlI9kTBI8oRyameRaHoAmK94YPjarIAhUiag
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZXJmZWN0ZGFydCIsInN1YiI6ImtldmluIiwiZXhwIjoxNzk1MTA3MDM1LCJpYXQiOjE3OTUxMDM0MzV9.DqrD7FvDj35wbCsD89ZI-kmkYhGk9nO6fq6mkxoNpQc
 
 settings:
   encodeUrl: true
