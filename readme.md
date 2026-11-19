@@ -68,3 +68,26 @@ Les tests utilisent une base H2 en mémoire et ne nécessitent pas de conteneur 
 ```bash
 ./mvnw test
 ```
+## Authentification (Bearer token)
+
+1. Se connecter pour obtenir un token :
+
+```http
+POST http://localhost:8084/auth/login
+Content-Type: application/json
+
+{"pseudo": "nokiade", "password": "1234"}
+```
+
+Réponse `200` : `{"token": "..."}`. Mauvais identifiants : `401`.
+
+2. Envoyer ce token dans le header `Authorization` sur les routes protégées (`/games/**`) :
+
+```http
+GET http://localhost:8084/games
+Authorization: Bearer <token>
+```
+
+Sans token ou avec un token invalide : `401`. `/auth/login` et `/players` restent accessibles sans token.
+
+Dans Bruno : onglet **Auth** de la requête, choisir **Bearer Token** et coller le token.
