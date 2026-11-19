@@ -1,0 +1,21 @@
+info:
+  name: Creer Partie
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:8084/games
+  body:
+    type: json
+    data: '{"mode":"501","statut":"EN_COURS"}'
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
