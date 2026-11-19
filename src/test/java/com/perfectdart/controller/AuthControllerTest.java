@@ -108,6 +108,19 @@ class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Bienvenue !"));
 
+        mockMvc.perform(get("/swagger-ui/index.html"))
+                .andExpect(status().isOk());
+
+        String apiDocs = mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.components.securitySchemes.bearerAuth.scheme").value("bearer"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        JsonNode openApi = objectMapper.readTree(apiDocs);
+        assertTrue(openApi.at("/paths/~1games/get/security/0/bearerAuth").isArray());
+        assertTrue(openApi.at("/paths/~1auth~1login/post/security").isMissingNode());
+
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(LOGIN_BODY.formatted(PASSWORD)))
@@ -117,7 +130,8 @@ class AuthControllerTest {
                 .andExpect(status().isUnauthorized());
 
         mockMvc.perform(get("/players"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].password").doesNotExist());
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.perfectdart.controller;
 
 import com.perfectdart.entity.Game;
 import com.perfectdart.service.GameService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/games")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class GameController {
 
     private final GameService gameService;

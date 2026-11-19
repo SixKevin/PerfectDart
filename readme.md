@@ -65,11 +65,17 @@ Les exemples de corps JSON correspondent aux champs actuels des entités. `level
 | DELETE | `/games/{id}` | |
 | POST | `/auth/login` | `{"pseudo":"nokiade","password":"mot-de-passe"}` |
 
-Toutes les routes sauf `POST /auth/login` nécessitent un JWT dans l'en-tête `Authorization`. Le mot de passe n'est jamais inclus dans les réponses JSON.
+`GET /` et les routes `/players/**` sont accessibles sans token. Les routes `/games/**` nécessitent un JWT dans l'en-tête `Authorization`. Le mot de passe n'est jamais inclus dans les réponses JSON.
 
-## Authentification Bearer
+## Documentation Swagger
 
-`POST /auth/login` est la seule route accessible sans authentification. Les autres routes nécessitent un JWT valide, valable une heure.
+Quand l'API est lancée, la documentation interactive est disponible sur **http://localhost:8084/swagger-ui/index.html**. Elle permet de consulter les endpoints et d'essayer les requêtes.
+
+Pour tester les routes `/games/**`, appelle d'abord `POST /auth/login` depuis Swagger UI. Copie la valeur `token` renvoyée, clique sur **Authorize**, puis colle le JWT (sans ajouter `Bearer ` : Swagger le préfixe automatiquement). Les routes joueurs sont publiques dans la configuration actuelle.
+
+## Authentification
+
+`POST /auth/login`, `GET /` et les routes `/players/**` sont accessibles sans authentification. Les routes `/games/**` nécessitent un JWT valide, valable une heure.
 
 1. Se connecter pour obtenir un JWT :
 
@@ -85,7 +91,7 @@ Réponse `200` : `{"token":"..."}`. Mauvais identifiants : `401`.
 2. Envoyer ce token dans l'en-tête `Authorization` sur les routes protégées :
 
 ```http
-GET http://localhost:8084/players
+GET http://localhost:8084/games
 Authorization: Bearer <token>
 ```
 
