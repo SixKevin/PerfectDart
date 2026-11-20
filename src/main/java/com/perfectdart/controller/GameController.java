@@ -42,6 +42,13 @@ public class GameController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}/players")
+    public ResponseEntity<Game> updatePlayers(@PathVariable Long id, @RequestBody List<Long> playerIds) {
+        return gameService.updateGamePlayers(id, playerIds)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return gameService.deleteGame(id)

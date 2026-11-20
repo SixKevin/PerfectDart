@@ -62,6 +62,7 @@ Les exemples de corps JSON correspondent aux champs actuels des entités. `level
 | GET | `/games/{id}` | |
 | POST | `/games` | `{"mode":"501","statut":"EN_COURS"}` |
 | PUT | `/games/{id}` | `{"mode":"501","statut":"TERMINE"}` |
+| PUT | `/games/{id}/players` | `[1,2]` (remplace les joueurs associés à la partie) |
 | DELETE | `/games/{id}` | |
 | POST | `/auth/login` | `{"pseudo":"nokiade","password":"mot-de-passe"}` |
 
